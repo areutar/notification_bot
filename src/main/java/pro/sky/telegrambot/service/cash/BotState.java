@@ -1,0 +1,18 @@
+package pro.sky.telegrambot.service.cash;
+
+public enum BotState {
+    MAIN_MENU_STATE,
+
+    CREATE_FILL_DATE_STATE,
+    CREATE_FILL_TIME_STATE,
+    CREATE_FILL_TEXT_STATE,
+
+    EDIT_FILL_NUMBER_STATE,
+    EDIT_FILL_DATE_STATE,
+    EDIT_FILL_TIME_STATE,
+    EDIT_FILL_TEXT_STATE,
+
+    DELETE_FILL_NUMBER_STATE,
+
+    FIND_FILL_EXCERPT_STATE
+}
