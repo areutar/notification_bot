@@ -34,7 +34,7 @@ public class CreateNotificationServiceImpl implements CreateNotificationService 
     private final NotificationCash notificationCash;
     private final UserService userService;
     private final SendBotMessageService messageService;
-
+    
     @Override
     @Transactional
     public void createNotification(Update update) {
@@ -82,25 +82,25 @@ public class CreateNotificationServiceImpl implements CreateNotificationService 
 
             case CREATE_FILL_TEXT_STATE: {
                 TelegramUser user = userService.getUser(update);
-                Long notificationsNumber = user.getNotificationsNumber();
 
                 notification.setUser(user);
                 notification.setText(request);
-                notification.setNumber(++notificationsNumber);
 
                 try {
                     repository.save(notification);
-                    user.setNotificationsNumber(notificationsNumber);
                     botCash.put(chatId, MAIN_MENU_STATE);
                     messageService.sendMessage(chatId, SAVED_OK);
+                    noteCash.remove(chatId);
+                    notification = null;
                 } catch (Exception e) {
                     messageService.sendMessage(chatId, SAVED_FAIL + e.getMessage());
                 }
                 break;
             }
         }
-
-        noteCash.put(chatId, notification);
+        if (notification != null) {
+            noteCash.put(chatId, notification);
+        }
     }
 
 }

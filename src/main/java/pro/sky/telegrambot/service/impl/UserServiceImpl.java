@@ -20,7 +20,6 @@ public class UserServiceImpl implements UserService {
         TelegramUser user = new TelegramUser();
         user.setName(name);
         user.setChatId(chatId);
-        user.setNotificationsNumber(0L);
         return repository.save(user);
     }
 

@@ -8,7 +8,7 @@ import java.util.Optional;
 public interface FindNotificationsService {
     void findNotifications(Update update);
 
-    Optional<Notification> findNotificationByNumberAndUser_ChatId(Long number, Long chatId);
+    Optional<Notification> findNotificationByNumberAndUser_ChatId(Long id, Long chatId);
 
     String findNotificationsByPart(Update update);
 

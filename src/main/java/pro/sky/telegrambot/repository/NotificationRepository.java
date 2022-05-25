@@ -16,14 +16,14 @@ public interface NotificationRepository extends JpaRepository<Notification, Long
             "where n.user.chatId = :chatId and lower(n.text) like %:word%")
     List<Notification> findNotificationsByPart(@Param("chatId") Long chatId, @Param("word") String word);
 
-    @Query(value = "select * from notification_task " +
+    @Query(value = "select * from notifications " +
             "where date_trunc('minute', time) = date_trunc('minute', now())",
             nativeQuery = true)
     List<Notification> getCurrentNotifications();
 
-    Optional<Notification> findNotificationByNumberAndUser_ChatId(Long number, Long chatId);
+    Optional<Notification> findNotificationByIdAndUser_ChatId(Long id, Long chatId);
 
-    void deleteNotificationByNumber(Long number);
+    void deleteNotificationById(Long Id);
 
     // not working
     @Query(value = "select n from Notification n join TelegramUser u " +
@@ -38,7 +38,7 @@ public interface NotificationRepository extends JpaRepository<Notification, Long
             "        n.time as time3_0_,\n" +
             "        n.user_id as user_id4_0_ \n" +
             "    from\n" +
-            "        notification_task n \n" +
+            "        notifications n \n" +
             "    left outer join\n" +
             "        users telegramus1_ \n" +
             "            on n.user_id=telegramus1_.id \n" +

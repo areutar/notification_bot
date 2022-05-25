@@ -32,7 +32,7 @@ public class SendBotMessageServiceImpl implements SendBotMessageService {
     }
 
     @Override
-    public void sendMessageWithKeaboard(Long chatId, String message, boolean scheduling) {
+    public void sendMessageWithKeyboard(Long chatId, String message, boolean scheduling) {
         if (isBlank(message)) return;
         SendMessage sendMessage = new SendMessage(chatId, message);
 
@@ -41,6 +41,11 @@ public class SendBotMessageServiceImpl implements SendBotMessageService {
         } else {
             buttons[0][0] = START_COMMAND.getCommandName();
         }
+       showKeyboard(sendMessage);
+    }
+
+    @Override
+    public void showKeyboard(SendMessage sendMessage) {
         ReplyKeyboardMarkup keyboardMarkup = new ReplyKeyboardMarkup(buttons);
         keyboardMarkup.resizeKeyboard(true);
         sendMessage.replyMarkup(keyboardMarkup);

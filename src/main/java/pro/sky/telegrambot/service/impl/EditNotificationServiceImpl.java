@@ -49,21 +49,21 @@ public class EditNotificationServiceImpl implements EditNotificationService {
 
         switch (botState) {
             case MAIN_MENU_STATE: {
-                messageService.sendMessage(chatId, ENTER_NUMBER);
-                botCash.put(chatId, EDIT_FILL_NUMBER_STATE);
+                messageService.sendMessage(chatId, ENTER_ID);
+                botCash.put(chatId, EDIT_FILL_ID_STATE);
                 break;
             }
 
-            case EDIT_FILL_NUMBER_STATE: {
-                Long number = ParsingUtil.parseNumber(request);
+            case EDIT_FILL_ID_STATE: {
+                Long id = ParsingUtil.parseNumber(request);
 
-                if (number != null && findService.findNotificationByNumberAndUser_ChatId(
-                        number, chatId).isPresent()) {
-                    notificationNew.setNumber(number);
+                if (id != null && findService.findNotificationByNumberAndUser_ChatId(
+                        id, chatId).isPresent()) {
+                    notificationNew.setId(id);
                     messageService.sendMessage(chatId, ENTER_DATE);
                     botCash.put(chatId, EDIT_FILL_DATE_STATE);
                 } else {
-                    messageService.sendMessage(chatId, WRONG_NUMBER);
+                    messageService.sendMessage(chatId, WRONG_ID);
                 }
                 break;
             }
@@ -97,7 +97,7 @@ public class EditNotificationServiceImpl implements EditNotificationService {
 
             case EDIT_FILL_TEXT_STATE: {
                 notificationOld = findService.findNotificationByNumberAndUser_ChatId(
-                        notificationNew.getNumber(), chatId).get();
+                        notificationNew.getId(), chatId).get();
                 notificationOld.setTime(notificationNew.getTime());
                 notificationOld.setText(request);
 

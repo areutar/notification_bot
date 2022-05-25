@@ -49,8 +49,8 @@ public class FindNotificationsServiceImpl implements FindNotificationsService {
     }
 
     @Override
-    public Optional<Notification> findNotificationByNumberAndUser_ChatId(Long number, Long chatId) {
-        return repository.findNotificationByNumberAndUser_ChatId(number, chatId);
+    public Optional<Notification> findNotificationByNumberAndUser_ChatId(Long id, Long chatId) {
+        return repository.findNotificationByIdAndUser_ChatId(id, chatId);
     }
 
     @Override
@@ -64,6 +64,6 @@ public class FindNotificationsServiceImpl implements FindNotificationsService {
     @Override
     public String findAllNotifications(Update update) {
         return listToString(repository.findNotificationByUser_ChatId(getChatId(update),
-                Sort.by(Sort.Direction.ASC, "number")));
+                Sort.by(Sort.Direction.ASC, "id")));
     }
 }

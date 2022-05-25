@@ -17,7 +17,7 @@ public class NotificationConst {
     public static final String DELETE_FAIL = "Не удалось удалить напоминание по причине ";
 
 
-    public static final String WRONG_NUMBER = "Неправильный номер напоминанания! Введите номер заново\n" +
+    public static final String WRONG_ID = "Неправильный номер напоминанания! Введите номер заново\n" +
             " или отмените действия кнопкой 'Отменить'";
     public static final String WRONG_DATE = "Неправильно введена дата! Дата должна быть " +
             " в формате dd.mm.yyyy. Введите дату заново или\n" +
@@ -26,7 +26,7 @@ public class NotificationConst {
             "в формате hh:mm. Введите время заново\n" +
             " или отмените действия кнопкой 'Отменить'";
 
-    public static final String ENTER_NUMBER = "Введите номер напоминания";
+    public static final String ENTER_ID = "Введите номер напоминания";
     public static final String ENTER_DATE = "Введите дату";
     public static final String ENTER_TIME = "Введите время";
     public static final String ENTER_TEXT = "Введите текст напоминания";

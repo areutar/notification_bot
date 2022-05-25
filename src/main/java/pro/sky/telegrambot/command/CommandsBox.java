@@ -1,5 +1,6 @@
 package pro.sky.telegrambot.command;
 
+import com.pengrad.telegrambot.request.SendMessage;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import pro.sky.telegrambot.service.*;
@@ -27,23 +28,26 @@ public class CommandsBox {
 
     @PostConstruct
     private void initCommands() {
+        schedulingService.setScheduling(true);
+        sendService.showKeyboard(new SendMessage("", GREETINGS_MESSAGE));
+
         // first row of buttons
         commands.put(GREET_COMMAND, update -> {
             // если имя пользователя вдруг изменилось, обновляю его в базе
             userService.updateUserName(update);
             String greetings = String.format("%s %s !", GREETINGS_MESSAGE, getUserName(update));
-            sendService.sendMessageWithKeaboard(getChatId(update), greetings, true);
+            sendService.sendMessageWithKeyboard(getChatId(update), greetings, true);
         });
 
         commands.put(START_COMMAND, update -> {
             schedulingService.setScheduling(true);
-            sendService.sendMessageWithKeaboard(getChatId(update),
+            sendService.sendMessageWithKeyboard(getChatId(update),
                     schedulingService.getEnabled(), true);
         });
 
         commands.put(STOP_COMMAND, update -> {
             schedulingService.setScheduling(false);
-            sendService.sendMessageWithKeaboard(getChatId(update),
+            sendService.sendMessageWithKeyboard(getChatId(update),
                     schedulingService.getEnabled(), false);
         });
 
